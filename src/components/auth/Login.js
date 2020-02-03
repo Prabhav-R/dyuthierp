@@ -43,7 +43,12 @@ class Login extends Component {
       history.push("/");
     }
     if (errors.err) {
-      this.setState({ err: errors.err.code.split("/")[1] });
+      this.setState({
+        err: errors.err.code
+          .split("/")[1]
+          .split("-")
+          .join(" ")
+      });
       setTimeout(() => this.setState({ err: "" }), 3000);
     }
   }
