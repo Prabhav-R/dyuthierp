@@ -67,11 +67,17 @@ class Event extends Component {
     e.preventDefault();
     const { roundname, date, time, venue, currRound, currIndex } = this.state;
 
-    const dup = this.validate(roundname);
+    if (
+      date === currRound.date &&
+      time === currRound.time &&
+      venue === currRound.venue
+    ) {
+      const dup = this.validate(roundname);
 
-    if (dup) {
-      this.setState({ [dup.type]: dup.err });
-      return;
+      if (dup) {
+        this.setState({ [dup.type]: dup.err });
+        return;
+      }
     }
 
     if (
@@ -90,7 +96,7 @@ class Event extends Component {
     newRounds[currIndex] = newRound;
     this.props.addRound(eid, newRounds);
 
-    // this.closeModalRef.current.click();
+    this.closeModalRef.current.click();
   };
 
   deleteRound = index => {
