@@ -12,6 +12,7 @@ import PrivateRoute from "./components/auth/PrivateRoute";
 
 import Navbar from "./components/layout/Navbar";
 import ComingSoon from "./components/layout/ComingSoon";
+import PageNotFound from "./components/layout/PageNotFound";
 
 import Event from "./components/pages/Event";
 import ParticipantList from "./components/pages/ParticipantList";
@@ -63,6 +64,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
 
               <PrivateRoute exact path="/" component={AdminPage} />
+              <Route component={PageNotFound} />
             </Switch>
           </div>
         </Router>
@@ -83,6 +85,7 @@ class App extends Component {
               component={ComingSoon}
             />
             <PrivateRoute exact path="/edit-event" component={EditEvent} />
+            <Route component={PageNotFound} />
           </Switch>
         </div>
       </Router>
