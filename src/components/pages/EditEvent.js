@@ -48,6 +48,8 @@ class EditEvent extends Component {
 
     if (department === "GENERAL EVENT") {
       is_department = false;
+    } else {
+      is_department = true;
     }
 
     const { eid, eventname, username, posterUrl } = this.props.event.event;
