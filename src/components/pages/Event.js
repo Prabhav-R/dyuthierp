@@ -13,6 +13,8 @@ import {
   addRound
 } from "../../actions/eventActions";
 
+import renderHTML from "react-render-html";
+
 class Event extends Component {
   constructor(props) {
     super(props);
@@ -397,14 +399,12 @@ class Event extends Component {
             </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12">
-              <p>
-                {desc ? (
-                  desc
-                ) : (
-                  <Link to="/edit-event">Set Event Description</Link>
-                )}
-              </p>
+            <div className="col-md-12" style={{ textAlign: "left" }}>
+              {desc ? (
+                renderHTML(desc)
+              ) : (
+                <Link to="/edit-event">Set Event Description</Link>
+              )}
             </div>
           </div>
         </div>
