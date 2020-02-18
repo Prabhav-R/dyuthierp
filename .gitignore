@@ -9,6 +9,7 @@ storage.rules
 database.rules.json
 .firebaserc
 /.firebase
+firebaseconfig.txt
 
 # testing
 /coverage

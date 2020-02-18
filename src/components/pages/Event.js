@@ -13,6 +13,8 @@ import {
   addRound
 } from "../../actions/eventActions";
 
+import renderHTML from "react-render-html";
+
 class Event extends Component {
   constructor(props) {
     super(props);
@@ -397,14 +399,12 @@ class Event extends Component {
             </div>
           </div>
           <div className="row mt-3">
-            <div className="col-md-12">
-              <p>
-                {desc ? (
-                  desc
-                ) : (
-                  <Link to="/edit-event">Set Event Description</Link>
-                )}
-              </p>
+            <div className="col-md-12" style={{ textAlign: "left" }}>
+              {desc ? (
+                renderHTML(desc)
+              ) : (
+                <Link to="/edit-event">Set Event Description</Link>
+              )}
             </div>
           </div>
         </div>
@@ -417,7 +417,7 @@ class Event extends Component {
           </div>
           <div style={{ textAlign: "left" }} className="col-4">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
               data-toggle="modal"
               data-target="#roundModal"
             >
@@ -432,10 +432,10 @@ class Event extends Component {
               <div className="card-header">{round.roundname}</div>
               <div className="card-body">
                 <div className="row card-text mb-2">
-                  <div className="col-4">
+                  <div className="col-sm-4">
                     <h6>Date : {formatDate(round.date)}</h6>
                   </div>
-                  <div className="col-3">
+                  <div className="col-sm-4">
                     <h6>
                       Time :{" "}
                       {new Date(
@@ -451,8 +451,8 @@ class Event extends Component {
                       )}
                     </h6>
                   </div>
-                  <div className="col-5">
-                    <h6>Venue : {round.venue}</h6>
+                  <div className="col-sm-4">
+                    <h6>Venue: {round.venue}</h6>
                   </div>
                 </div>
                 <button

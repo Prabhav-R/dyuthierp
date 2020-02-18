@@ -3,6 +3,13 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { withRouter } from "react-router-dom";
 import { updateEvent } from "../../actions/eventActions";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw, ContentState } from "draft-js";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+
+import * as draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
+import sanitizeHtml from "sanitize-html";
 
 class EditEvent extends Component {
   constructor(props) {
@@ -14,7 +21,8 @@ class EditEvent extends Component {
       fee: "",
       type: "Individual",
       is_department: false,
-      department: ""
+      department: "",
+      editorState: EditorState.createEmpty()
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -28,15 +36,35 @@ class EditEvent extends Component {
     const { event } = this.props.event;
     const { desc, type, teamStrength, fee, is_department, department } = event;
 
+    const contentBlock = htmlToDraft(desc);
+    if (contentBlock) {
+      const contentState = ContentState.createFromBlockArray(
+        contentBlock.contentBlocks
+      );
+      const editorState = EditorState.createWithContent(contentState);
+      this.setState({
+        editorState
+      });
+    }
+
     this.setState({ desc, type, teamStrength, fee, is_department, department });
   }
+
+  onEditorStateChange: Function = editorState => {
+    this.setState({
+      editorState
+    });
+  };
 
   onSubmit(e) {
     e.preventDefault();
     // HANDLE FORM SUBMISSION
 
-    const { desc, teamStrength, fee } = this.state;
-    let { is_department, department, type } = this.state;
+    const { teamStrength, fee } = this.state;
+    let { desc, is_department, department, type, editorState } = this.state;
+
+    const op = draftToHtml(convertToRaw(editorState.getCurrentContent()));
+    desc = sanitizeHtml(op);
 
     if (type === "") {
       type = "Individual";
@@ -89,7 +117,6 @@ class EditEvent extends Component {
       >
         <p className="h2 mb-4">{eventname}</p>
         <p className="h4 mb-4">Edit Event</p>
-
         <div className="form-group row">
           <label className="col-sm-1 col-form-label">Type</label>
           <select
@@ -146,7 +173,6 @@ class EditEvent extends Component {
             />
           </div>
         </div>
-
         <div className="form-group">
           <select
             name="department"
@@ -171,17 +197,10 @@ class EditEvent extends Component {
             <option value="MCA">MCA</option>
           </select>
         </div>
-
         <div className="form-group">
-          <textarea
-            className="form-control rounded-0"
-            id="eventDescriptionInput"
-            rows={6}
-            placeholder="Event Description"
-            name="desc"
-            value={this.state.desc}
-            onChange={this.onChange}
-            required
+          <Editor
+            editorState={this.state.editorState}
+            onEditorStateChange={this.onEditorStateChange}
           />
         </div>
 

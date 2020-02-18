@@ -14,21 +14,9 @@ var firebaseConfig = {
   measurementId: "G-8TYM87Y5V3"
 };
 
-// var firebaseConfig = {
-//   apiKey: "AIzaSyBDIZaaWCpYrjJFdy-IXGzKgHD9C8Nh_ZI",
-//   authDomain: "dyuthierp.firebaseapp.com",
-//   databaseURL: "https://dyuthierp.firebaseio.com",
-//   projectId: "dyuthierp",
-//   storageBucket: "dyuthierp.appspot.com",
-//   messagingSenderId: "799799573144",
-//   appId: "1:799799573144:web:f1ecafc6ead307a902eeed",
-//   measurementId: "G-SPRV8QNX7F"
-// };
-
 const secondaryApp = firebase.initializeApp(firebaseConfig, "Secondary");
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.analytics();
 
 const storage = firebase.storage();
 
