@@ -29,6 +29,11 @@ class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
 
+    if(this.state.email == "" || this.state.password == ""){
+      alert("email and password is required")
+      return;
+    }
+
     this.props.login(this.state.email, this.state.password);
 
     this.setState({

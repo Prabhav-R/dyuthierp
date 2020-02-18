@@ -20,7 +20,7 @@ class Navbar extends Component {
   render() {
     const { isauthenticated, user } = this.props.auth;
 
-    if (user === "johndoe@gmail.com") {
+    if (user === "lettertodyuthi@gmail.com") {
       return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link className="navbar-brand" to="/">

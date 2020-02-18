@@ -55,7 +55,7 @@ class App extends Component {
   render() {
     const { user } = this.props.auth;
 
-    if (user === "johndoe@gmail.com") {
+    if (user === "lettertodyuthi@gmail.com") {
       return (
         <Router>
           <div className="App">
