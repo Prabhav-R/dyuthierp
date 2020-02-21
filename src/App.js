@@ -82,7 +82,7 @@ class App extends Component {
             <PrivateRoute
               exact
               path="/participant-list"
-              component={ComingSoon}
+              component={ParticipantList}
             />
             <PrivateRoute exact path="/edit-event" component={EditEvent} />
             <Route component={PageNotFound} />
