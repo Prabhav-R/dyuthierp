@@ -37,7 +37,7 @@ class ParticipantList extends Component {
           
         // }else{
           
-          database.ref("/event_participation").child('149363a0-220f-4731-8c86-5b96e226ebbf').once('value').then((snapshot)=>{
+          database.ref("/event_participation").child(eid).once('value').then((snapshot)=>{
             const snaps = snapshot.val();
             console.log(snaps);
             let participants = [];
